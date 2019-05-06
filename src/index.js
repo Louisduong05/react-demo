@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import MyComponentsPage from './pages/MyComponents'
 import HomePage from './pages/Home'
+import "./assets/styles/_css/application.css";
 
 ReactDOM.render(
   <Router>

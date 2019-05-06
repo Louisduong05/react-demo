@@ -1,6 +1,33 @@
 import React, { Component, Fragment } from "react";
 import Questions from "../components/Questions"
 
+const data = [
+  { 
+    id: 1,
+    title: "Day la con gi ?",
+    answers: {
+      "A" : "Ga",
+      "B" : "Voi",
+    }
+  },
+  { 
+    id: 2,
+    title: "Day la vat gi ?",
+    answers: {
+      "A" : "To",
+      "B" : "Chen",
+    }
+  },
+  { 
+    id: 3,
+    title: "Day la ai ?",
+    answers: {
+      "A" : "Louis",
+      "B" : "James",
+    }
+  }
+]
+
 class MyComponents extends Component {
   constructor(props) {
     super(props);
@@ -8,48 +35,26 @@ class MyComponents extends Component {
       answers: {},
     };
 
-    this.handleAnswer = this.handleAnswer.bind(this);
+    this.hanldeAnswer = this.hanldeAnswer.bind(this);
   }
-  handleAnswer = (id, answer) => {
+  hanldeAnswer = (id, answer) => {
     this.setState(state => ({
       answers: {
         ...this.state.answers,
         [id]: answer
-      },
-    }));
-  };
+      }
+    }))
+  }
   render() {
+    const { answers } = this.state;
+    
     console.log(this.state)
     return (
       <Fragment>
         <Questions
-          questions={[
-            { 
-              id: 1,
-              title: "Day la con gi ?",
-              answers: {
-                "A" : "Ga",
-                "B" : "Voi",
-              }
-            },
-            { 
-              id: 2,
-              title: "Day la vat gi ?",
-              answers: {
-                "A" : "To",
-                "B" : "Chen",
-              }
-            },
-            { 
-              id: 3,
-              title: "Day la ai ?",
-              answers: {
-                "A" : "Louis",
-                "B" : "James",
-              }
-            }
-          ]}
-          onAnswer={this.handleAnswer}
+          questions={data}
+          myAnswers={answers}
+          onAnswer={this.hanldeAnswer}         
         />
       </Fragment>
     );

@@ -5,9 +5,9 @@ import PropTypes from "prop-types";
 class Questions extends Component {
   handleAnswer = (id, answer) => {
     this.props.onAnswer(id, answer);
-  };
+  }
   render() {
-    const { questions } = this.props;
+    const { questions, myAnswers } = this.props;
 
     return(
       <div className="questions">
@@ -17,6 +17,7 @@ class Questions extends Component {
               id={id}
               key={id}
               title={title}
+              myAnswer={myAnswers[id]}
               answers={answers}
               onAnswer={this.handleAnswer}
             />
