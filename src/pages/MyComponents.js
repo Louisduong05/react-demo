@@ -1,5 +1,8 @@
 import React, { Component, Fragment } from "react";
-import Questions from "../components/Questions"
+import _ from "lodash";
+import Questions from "../components/Questions";
+import MyAnswer from "../components/MyAnswer";
+import Result from "../components/Result";
 
 const data = [
   { 
@@ -28,6 +31,17 @@ const data = [
   }
 ]
 
+const correctAnswers = {
+  "1": "A",
+  "2": "B",
+  "3": "C",
+}
+const answers = {
+  "1": "B",
+  "2": "D",
+  "3": "A",
+}
+
 class MyComponents extends Component {
   constructor(props) {
     super(props);
@@ -36,7 +50,15 @@ class MyComponents extends Component {
     };
 
     this.hanldeAnswer = this.hanldeAnswer.bind(this);
+    this.isCompleted = this.isCompleted.bind(this);
   }
+
+  isCompleted = () => {
+    const { answers } = this.state;
+
+    return _.keys(answers).length === data.length;
+  };
+
   hanldeAnswer = (id, answer) => {
     this.setState(state => ({
       answers: {
@@ -45,10 +67,10 @@ class MyComponents extends Component {
       }
     }))
   }
+
   render() {
-    const { answers } = this.state;
-    
-    console.log(this.state)
+    const { answers } = this.state; 
+
     return (
       <Fragment>
         <Questions
@@ -56,6 +78,14 @@ class MyComponents extends Component {
           myAnswers={answers}
           onAnswer={this.hanldeAnswer}         
         />
+        {this.isCompleted() && 
+          <div>
+            <MyAnswer
+              showAnswers={answers}
+            />
+            <Result correctAnswers={correctAnswers} answers={answers}/>
+          </div>
+        }
       </Fragment>
     );
   }

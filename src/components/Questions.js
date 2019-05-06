@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from "lodash";
 import Question from './Question'
 import PropTypes from "prop-types";
 
@@ -11,8 +12,9 @@ class Questions extends Component {
 
     return(
       <div className="questions">
-        {questions.map(({ id, title, answers }) => {
+        {questions.map(({ id, title, answers }, index) => {
           return(
+            _.keys(myAnswers).length === index &&
             <Question 
               id={id}
               key={id}
